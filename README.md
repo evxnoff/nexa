@@ -1,5 +1,5 @@
 # 💬 Nexa
-Une application de messagerie moderne, rapide et sécurisée développée en open-source.
+Une application de messagerie moderne et rapide développée en open-source.
 
 
 
