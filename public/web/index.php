@@ -56,13 +56,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <li id="buttonb"><a href="/logout">Se Déconnecter</a></li>
         </ul>
     </header>
-    <form action="" method="post">
+    <div id="chat-container">
+    <section id="msgs"></section>
+    <form id="chat-form" action="" method="post">
         <textarea name="msg" id="msg" placeholder="Message"></textarea>
-        <br/>
-        <input type="submit" name="submit">
+        <input type="submit" name="submit" value="Envoyer">
+        <script src="app.js"></script>
     </form>
-    <section id="msgs">
-    <script src="app.js"></script>
-</section>
+</div>
 </body>
 </html>

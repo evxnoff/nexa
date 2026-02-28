@@ -56,3 +56,91 @@ header img {
     height: 100%;   /* même hauteur que le header */
     width: auto;    /* garde les proportions */
 }
+
+/* Conteneur complet du chat */
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;           /* Ajuste selon ton design */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+/* Section messages */
+#msgs {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Formulaire collé en bas */
+#chat-form {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+}
+
+#chat-form textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 1em;
+    min-height: 50px;
+}
+
+#chat-form input[type="submit"] {
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#chat-form input[type="submit"]:hover {
+    background-color: orangered;
+}
+
+/* Bulles de message */
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+/* Auteur du message */
+.message h4 {
+    margin: 0 0 5px 0;
+    font-size: 0.85em;
+    color: #555;
+}
+
+/* Texte dans la bulle */
+.message p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Bulles autres utilisateurs (orange clair) */
+.message:not(.moi) {
+    background-color: yellowgreen; /* orange clair */
+    align-self: flex-start;
+}
+
+/* Bulles "Moi" */
+.message.moi {
+    background-color: orange;
+    color: white;
+    align-self: flex-end;
+}

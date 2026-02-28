@@ -20,10 +20,10 @@ $getMessage->execute([$_SESSION['id'], $getId, $getId, $_SESSION['id']]);
 while ($message = $getMessage->fetch()) {
     $auteur = ($message['auteur'] == $_SESSION['id']) ? "Moi" : htmlspecialchars($message['pseudo']);
     ?>
-    <div class="message">
-        <h4><?= $auteur ?></h4>
-        <p><?= htmlspecialchars($message['msg']) ?></p>
-    </div>
+    <div class="message <?= ($message['auteur'] == $_SESSION['id']) ? 'moi' : '' ?>">
+    <h4><?= ($message['auteur'] == $_SESSION['id']) ? 'Moi' : htmlspecialchars($message['pseudo']); ?></h4>
+    <p><?= htmlspecialchars($message['msg']); ?></p>
+</div>
     <?php
 }
 ?>
