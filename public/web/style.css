@@ -1,3 +1,6 @@
+/* =======================
+   Styles globaux
+======================= */
 body {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
@@ -6,13 +9,34 @@ body {
     padding: 0;
 }
 
+a {
+    text-decoration: none;  /* enlève le soulignement */
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* =======================
+   Header
+======================= */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;      /* ← plus petit */
-    padding: 15px;
+    padding: 15px 20px;
     background-color: #111;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+header img {
+    height: 100%;
+    width: auto;
 }
 
 #title {
@@ -27,76 +51,112 @@ header {
     margin: 0;
 }
 
-a {
-    text-decoration: none;  /* enlève le soulignement */
-    color: black;
-    font-size: 16px;        /* texte plus grand */
-    font-weight: 500;
-}
-
 #buttona,
 #buttonb {
     background-color: white;
     height: 50px;
-    width: 130px;          /* même largeur */
+    width: 130px;
     border-radius: 5px;
-
     display: flex;
-    justify-content: center; /* centre horizontal */
-    align-items: center;     /* centre vertical */
-
-    font-size: 14px;
-    text-decoration: none;
+    justify-content: center;
+    align-items: center;
     color: black;
     font-size: 16px;
     font-weight: 500;
 }
 
-header img {
-    height: 100%;   /* même hauteur que le header */
-    width: auto;    /* garde les proportions */
+/* =======================
+   Main content
+======================= */
+main {
+    margin-top: 80px;      /* espace pour le header */
+    padding-bottom: 70px;  /* espace pour le chat */
 }
 
-/* Conteneur complet du chat */
+/* =======================
+   Chat container
+======================= */
 #chat-container {
     display: flex;
     flex-direction: column;
-    height: 500px;           /* Ajuste selon ton design */
+    height: 100%;
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
     background-color: #f9f9f9;
 }
 
-/* Section messages */
 #msgs {
     flex: 1;
     padding: 10px;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow-y: auto;
 }
 
-/* Formulaire collé en bas */
+/* Bulles de message */
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    word-wrap: break-word;
+}
+
+.message h4 {
+    margin: 0 0 5px 0;
+    font-size: 0.85em;
+    color: #555;
+}
+
+.message p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.message:not(.moi) {
+    background-color: yellowgreen;
+    align-self: flex-start;
+}
+
+.message.moi {
+    background-color: orange;
+    color: white;
+    align-self: flex-end;
+}
+
+/* =======================
+   Chat form (fixed)
+======================= */
+/* Chat form fixé en bas avec 15% à gauche */
 #chat-form {
+    position: fixed;
+    bottom: 0;
+    left: 15%;           /* espace vide à gauche */
+    width: 85%;          /* largeur restante */
     display: flex;
     gap: 10px;
     padding: 10px;
     border-top: 1px solid #ccc;
     background-color: #fff;
+    box-sizing: border-box;
+    z-index: 2000;
+    height: 70px;
 }
 
+/* Textarea dans le formulaire */
 #chat-form textarea {
     flex: 1;
+    height: 50px;
     padding: 10px;
     border-radius: 15px;
     border: 1px solid #ccc;
     resize: none;
     font-size: 1em;
-    min-height: 50px;
+    box-sizing: border-box;
 }
 
+/* Bouton envoyer */
 #chat-form input[type="submit"] {
     background-color: orange;
     color: white;
@@ -111,36 +171,50 @@ header img {
     background-color: orangered;
 }
 
-/* Bulles de message */
-.message {
-    max-width: 70%;
-    padding: 10px 15px;
-    border-radius: 15px;
-    word-wrap: break-word;
+/* Conteneur du chat */
+#chat-container {
+    position: fixed;
+    bottom: 70px;       /* au-dessus du formulaire */
+    left: 15%;          /* même marge que le formulaire */
+    width: 85%;
+    max-height: calc(100vh - 70px - 80px); /* espace pour header + formulaire */
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: auto;
+    padding: 10px;
+}
+/* Chat form fixé en bas avec 15% d’espace à gauche */
+#chat-form {
+    position: fixed;
+    bottom: 0;
+    left: 15%;
+    width: calc(100% - 15%); /* largeur = total - marge gauche */
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    box-sizing: border-box;
+    z-index: 2000;
+    height: 70px;
 }
 
-/* Auteur du message */
-.message h4 {
-    margin: 0 0 5px 0;
-    font-size: 0.85em;
-    color: #555;
-}
-
-/* Texte dans la bulle */
-.message p {
-    margin: 0;
-    font-size: 1em;
-}
-
-/* Bulles autres utilisateurs (orange clair) */
-.message:not(.moi) {
-    background-color: yellowgreen; /* orange clair */
-    align-self: flex-start;
-}
-
-/* Bulles "Moi" */
-.message.moi {
-    background-color: orange;
-    color: white;
-    align-self: flex-end;
+/* Conteneur du chat */
+#chat-container {
+    position: fixed;
+    bottom: 70px; /* au-dessus du formulaire */
+    left: 15%;
+    width: calc(100% - 15%);
+    max-height: calc(100vh - 70px - 80px); /* header + formulaire */
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: auto;
+    padding: 10px;
+    box-sizing: border-box; /* pour inclure padding et border */
 }
