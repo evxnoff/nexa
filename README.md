@@ -1,11 +1,11 @@
-# 💬 Nexa
+# 💬 Noxa
 Une application de messagerie moderne et rapide développée en open-source.
 
 
 
 ## 🚀 À propos du projet
 
-**Nexa** est une plateforme de communication permettant d’échanger des messages en temps réel entre utilisateurs.
+**Noxa** est une plateforme de communication permettant d’échanger des messages en temps réel entre utilisateurs.
 
 Objectifs du projet :
 
