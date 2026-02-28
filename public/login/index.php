@@ -35,6 +35,13 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1 id="title">Nexa</h1>
+        <ul id="list">
+            <li id="buttona"><a href="/login">Se Connecter</a></li>
+            <li id="buttonb"><a href="/register">S'Inscrire</a></li>
+        </ul>
+    </header>
     <form action="" method="post" align="center">
         <input type="email" name="mail" value="<?= htmlspecialchars($_POST['mail'] ?? '') ?>" required>
         <br/>

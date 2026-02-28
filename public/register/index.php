@@ -13,20 +13,15 @@ if (isset($_POST["submit"])) {
     } elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Adresse e-mail invalide.';
     } else {
-        // Vérifier si l'email existe déjà
         $stmt = $db->prepare('SELECT id FROM users WHERE mail = ?');
         $stmt->execute([$mail]);
         if ($stmt->fetch()) {
             $errors[] = 'Cette adresse e-mail est déjà utilisée.';
         } else {
-            // Hash du mot de passe
             $hash = sha1($pass);
-
-            // Insérer l'utilisateur
             $insertUser = $db->prepare('INSERT INTO users(mail, pass) VALUES (?, ?)');
             $insertUser->execute([$mail, $hash]);
 
-            // Connexion automatique
             $getUser = $db->prepare('SELECT * FROM users WHERE mail = ? AND pass = ?');
             $getUser->execute([$mail, $hash]);
             $user = $getUser->fetch(PDO::FETCH_ASSOC);
@@ -48,8 +43,16 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexa - Inscription</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1 id="title">Nexa</h1>
+        <ul id="list">
+            <li id="buttona"><a href="/login">Se Connecter</a></li>
+            <li id="buttonb"><a href="/register">S'Inscrire</a></li>
+        </ul>
+    </header>
     <form action="" method="post" align="center">
         <input type="email" name="mail" autocomplete="off" value="<?= htmlspecialchars($_POST['mail'] ?? '') ?>" required>
         <br/>
