@@ -1,7 +1,42 @@
 <?php
 require __DIR__ . '/../config.php';
-if (!$_SESSION['pass']) {
+
+if (!isset($_SESSION['pass'])) {
     header('Location: /login');
+    exit();
+}
+
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+    $getId = (int) $_GET['id'];
+
+    $getUser = $db->prepare('SELECT * FROM users WHERE id = ?');
+    $getUser->execute([$getId]);
+
+    if ($getUser->rowCount() > 0) {
+
+        if (isset($_POST['submit']) && !empty($_POST['msg'])) {
+
+            $msg = $_POST['msg'];
+
+            $insertMessage = $db->prepare(
+                'INSERT INTO messages(auteur, destinataire, msg)
+                 VALUES(?, ?, ?)'
+            );
+
+            $insertMessage->execute([
+                $_SESSION['id'],
+                $getId,
+                $msg
+            ]);
+        }
+
+    } else {
+        echo 'Aucun utilisateur trouvé.';
+    }
+
+} else {
+    echo 'Aucun ID trouvé.';
 }
 ?>
 <!DOCTYPE html>
@@ -20,6 +55,13 @@ if (!$_SESSION['pass']) {
             <li id="buttonb"><a href="/logout">Se Déconnecter</a></li>
         </ul>
     </header>
-    <form action="" method="post"></form>
+    <form action="" method="post">
+        <textarea name="msg" id="msg" placeholder="Message"></textarea>
+        <br/>
+        <input type="submit" name="submit">
+    </form>
+    <section id="msgs">
+
+    </section>
 </body>
 </html>
