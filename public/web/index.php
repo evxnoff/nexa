@@ -1,5 +1,8 @@
 <?php
 require __DIR__ . '/../config.php';
+if (!$_SESSION['pass']) {
+    header('Location: /login');
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -12,7 +15,8 @@ require __DIR__ . '/../config.php';
     <header>
         <h1 id="title">Nexa</h1>
         <ul id="list">
-            <li id="buttonb"><a href="/">Home</a></li>
+            <li id="buttona"><a href="/">Home</a></li>
+            <li id="buttonb"><a href="/logout">Se Déconnecter</a></li>
         </ul>
     </header>
     <form action="" method="post"></form>
